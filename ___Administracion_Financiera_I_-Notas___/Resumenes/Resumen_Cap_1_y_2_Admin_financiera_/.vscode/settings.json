@@ -1,0 +1,32 @@
+{
+    "ltex.ignoreRuleInSentence": [
+        {
+            "rule": "ENGLISH_WORD_REPEAT_RULE",
+            "sentence": "^\\QCapital budgeting decisions decisions as to what types of assets should be purchased to help generate future cash flows.\\E$"
+        },
+        {
+            "rule": "ENGLISH_WORD_REPEAT_RULE",
+            "sentence": "^\\QDividend policy decisions decisions concerning how much of current earnings to pay out as dividends rather than retain for reinvestment in the firm.\\E$"
+        },
+        {
+            "rule": "MORFOLOGIK_RULE_EN_US",
+            "sentence": "^\\Q15th century modern accounting was born with Benetto Cotrugli (double entry bookkeeping system)\\E$"
+        },
+        {
+            "rule": "MORFOLOGIK_RULE_EN_US",
+            "sentence": "^\\Q15th century modern accounting was born with Benetto Cotrugli (double entry bookkeeping system).\\E$"
+        },
+        {
+            "rule": "MORFOLOGIK_RULE_EN_US",
+            "sentence": "^\\QLuca Pacioli formally developed the double entry system.\\E$"
+        },
+        {
+            "rule": "MASS_AGREEMENT",
+            "sentence": "^\\QThe balance sheet.\\E$"
+        },
+        {
+            "rule": "PUNCTUATION_PARAGRAPH_END",
+            "sentence": "^\\Q\\EDummy[0-9]+\\Q Common stocks at par \\EDummy[0-9]+\\Q Total shares issued \\EDummy[0-9]+\\Q share par value\\E$"
+        }
+    ]
+}

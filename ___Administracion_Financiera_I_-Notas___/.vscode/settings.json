@@ -1,0 +1,8 @@
+{
+    "ltex.ignoreRuleInSentence": [
+        {
+            "rule": "EN_BASE_A",
+            "sentence": "^\\QSSSE.Qué indican las cuentas bit Se enlistan en base a su liquidez.\\E$"
+        }
+    ]
+}

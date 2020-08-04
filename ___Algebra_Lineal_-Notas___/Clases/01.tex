@@ -1,0 +1,123 @@
+\section{Sistemas de ecuaciones lineales}
+\begin{itemize}
+    \item Ec. recta en $\mathbb{R}^2$  $ax+by=c$.
+    \item Ec. recta en $\mathbb{R}^3$  $ax+by+cz=d$.
+    \item Ex. Lineal en n variables: $a_1x_1+a_2x_2+\dots+a_nx_n=b$ 
+    \item Coheficientes $a_1,a_2,\dots,a_n$ $a_i \in \mathbb{R}$ 
+    \item Término constante: b
+\end{itemize}
+
+\subsection{Ejemplos}
+\begin{center}
+   \begin{align*}
+        3x_1-9x_2+12 = 0 \\ 
+        \sqrt{2}w+\ln\p{ 8 } x+e^{10}y+\frac{1}{\pi}z  = 5  \\ 
+   \end{align*}
+\end{center}
+\begin{itemize}
+    \item Son ecuaciones lineales. 
+\end{itemize}
+
+\subsection{Ecuaciones que no son lineales}
+\begin{itemize}
+    \item Producto entre variables $xy+yz=8$ NO ES
+    \item Potencia diferente de uno $x^2+\sqrt{y}+z^{-1}=8$ NO ES
+    \item Funciones no lineales: $\sqrt{2w}+\ln\p{ 8x } +e^{10y} = \sin\p{ 3 } $ 
+\end{itemize}
+
+\subsection{Solución de una ecuación lineal}
+\begin{itemize}
+    \item La solución es un vector $[S_1,S_2,...S_n]$  cuyos componentes si satisfacen la ec. $a_1x_1+a_2x_2+\dots+a_nx_=b$  cuando se substituyen las $S_i$.
+\end{itemize}
+Ejemplo: considere la ec. lineal $3x_1-9x_2+12= 0$
+\begin{center}
+   \begin{align*}
+       \text{ Resuelva para $x_i$:  } \begin{array}{l}
+           x_1 = 3t-4 \\ 
+           x_2= t \\ 
+       \end{array} \qq \qq \vec{S} = \begin{bmatrix}
+            3t-4 \\ 
+            t \\ 
+       \end{bmatrix}\\ 
+   \end{align*}
+   \begin{itemize}
+       \item $t$, parámetro es cualquier número real.
+       \item Verifique: $9t-12-9t+12=0$ \checkmark  
+   \end{itemize}
+\end{center}
+
+Sistema de ecuaciones lineales: es un conjunto finito de ecuaciones lineales. $m$ ecuaciones de $n$ variables.
+
+\begin{center}
+   \begin{align*}
+       \begin{array}{l}
+           x + y+z=8 \\ 
+           x+y+z=4 \\ 
+           2x+z = 4 \\
+       \end{array} 
+       \qq \qq \begin{array}{l}
+           x+y=8 \\ 
+           x+y=10 \\ 
+           x+3y=5 \\ 
+       \end{array} \\ 
+       \\ 
+       x+y+z=4 \qq \qq \text{$m $ y $n$ } \\ %%%%%
+   \end{align*}
+\end{center}
+
+Solución de un sistema de ecuaciones: es un vector $\vec{S}$ que satisface todas las ecs. del sistema.
+
+\subsection{Ejercicio 1}
+Resuelva los siguientes sistemas (pg12).
+\begin{enumerate}
+    \item 
+        \begin{center}
+            \begin{align*}
+                \begin{array}{l}
+                    x+y=2 \\ 3x+3y=6 \\ 
+                \end{array}
+                \qq \qq 
+                \text{ 2 ecs $\times$ 2 variables } \\ 
+            \end{align*}
+        \end{center}
+        \begin{itemize}
+            \item Métodos: Algebraico (eliminación, sustitución, igualación).
+            \item Gráfico: la sola intersección entre las rectas.
+        \end{itemize}
+        \begin{center}
+           \begin{align*}
+               R_2-3R_1: \qq 0+0=0 \qquad \implies 0=0 \qquad \text{ tautología. } \\ 
+               \frac{1}{3} R_2: \qq x+y=2 \qquad \text{ la recta está repetida. } \\ 
+               \text{ La solución es $y=2-x$ } \\ 
+               \begin{array}{l}
+                   x=t \\ 
+                   y=2-t \\ 
+               \end{array} \qquad 
+               \begin{array}{l}
+                   \vec{S} = \begin{bmatrix}
+                       t \\ 2-t \\ 
+                   \end{bmatrix}
+               \end{array}
+               \begin{array}{lll}
+                    \begin{bmatrix}
+                        0 \\ 2 \\ 
+                    \end{bmatrix} &
+                    \begin{bmatrix}
+                        1 \\1  \\ 
+                    \end{bmatrix} &
+                    \begin{bmatrix}
+                        2 \\ 0 \\ 
+                    \end{bmatrix} &
+                    ...
+                   \\ 
+               \end{array} 
+            \\ 
+               \text{ Sustitución:  } \begin{array}{l}
+                   y=2-x \\ 
+                   3x+6-3x=6 \\ 
+               \end{array}
+               \qq \implies  6 = 6 \\ 
+               
+           \end{align*}
+        \end{center}
+\end{enumerate}

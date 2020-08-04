@@ -1,0 +1,16 @@
+{
+    "ltex.ignoreRuleInSentence": [
+        {
+            "rule": "AGREEMENT_DET_NOUN",
+            "sentence": "^\\QEn esa época Holanda era el Nueva York de hoy.\\E$"
+        },
+        {
+            "rule": "MORFOLOGIK_RULE_ES",
+            "sentence": "^\\QDescartes entonces se fue a Holanda (por lo liberal que es), Holanda es un safe-heaven para personas que buscan la libertad.\\E$"
+        },
+        {
+            "rule": "MORFOLOGIK_RULE_ES",
+            "sentence": "^\\QSegunda critica (crítica de la razón práctica): el Faktum moral.\\E$"
+        }
+    ]
+}

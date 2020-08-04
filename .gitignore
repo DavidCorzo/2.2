@@ -1,0 +1,6 @@
+Main/
+*.pygtex
+*.out
+*.log
+*.aux
+*.toc
