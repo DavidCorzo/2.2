@@ -22,8 +22,8 @@ def main():
     b_n(56,9)
     print("{:.50f}".format(time.perf_counter() - start))
     start = time.perf_counter()
-    conejos_fib(10)
-    print("{:.50f}".format(time.perf_counter() - start))
+    b_n(2,100)
+    print("{:.50f}".format(time.perf_counter() - start)*1000)
 
 if __name__ == "__main__":
     main()

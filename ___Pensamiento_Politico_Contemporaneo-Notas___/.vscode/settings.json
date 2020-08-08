@@ -12,5 +12,10 @@
             "rule": "MORFOLOGIK_RULE_ES",
             "sentence": "^\\QSegunda critica (crítica de la razón práctica): el Faktum moral.\\E$"
         }
-    ]
+    ],
+    "ltex.disabledRules": {
+        "es": [
+            "MORFOLOGIK_RULE_ES"
+        ]
+    }
 }
