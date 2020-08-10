@@ -1,0 +1,20 @@
+{
+    "ltex.ignoreRuleInSentence": [
+        {
+            "rule": "MORFOLOGIK_RULE_ES",
+            "sentence": "^\\QDicho modelo fue desarrollado por el profesor Nokiari Kano en Japón,\\E$"
+        },
+        {
+            "rule": "MORFOLOGIK_RULE_ES",
+            "sentence": "^\\QEl modelo Kano es una herramienta analítica utilizada para relacionar las características de un producto con el nivel de satisfacción que estas derivaron al cliente final.\\E$"
+        },
+        {
+            "rule": "MORFOLOGIK_RULE_ES",
+            "sentence": "^\\Q\\EDummy[0-9]+\\Q El modelo Kano propone analizar las experiencias de los clientes basado en un gráfico, en el eje-x tenemos que tan buena ejecución tiene el producto o servicio y en el eje-y tenemos qué tan satisfecho está el cliente o que tan asqueado.\\E$"
+        },
+        {
+            "rule": "MORFOLOGIK_RULE_ES",
+            "sentence": "^\\QDicho modelo fue desarrollado por el profesor Nokiari Kano en Japón.\\E$"
+        }
+    ]
+}
