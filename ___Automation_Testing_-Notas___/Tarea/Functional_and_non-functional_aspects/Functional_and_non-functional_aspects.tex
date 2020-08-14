@@ -1,0 +1,62 @@
+\documentclass{article}
+
+\usepackage{generalsnips}
+\usepackage{calculussnips}
+\usepackage[margin = 1in]{geometry}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\title{Functional and non-functional aspects of WhatsApp}
+\date{2020 August 11} % , 11:09PM
+\author{David Corzo}
+
+\begin{document}
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% func testing: system testing, integration, smoke, sanity. 
+\section{Platform: WhatsApp}
+
+\subsection{Sending messages and media}
+This is considered the main function of the WhatsApp application, the next tests are to test requirements and ability to handle real-world workload.
+\begin{itemize}
+    \item System testing (Functional): the application's main function is sending messages and/or media to other users, the end user can try the software to check if the software is working as per their requirements in a real environment.
+    \item Load testing (Non-functional): this test allows measuring how well the application handles a particular workload in a real world environment, it measures its ability to process all the workload, the time this handling took. Based on these measurements, the software performance is compared with the requirements. 
+\end{itemize}
+
+\subsection{System security}
+One of the most important features of WhatsApp is to make the information you send through it private. 
+\begin{itemize}
+    \item Integration testing (Functional): this test is designed to know the performance of the app when two or more functions or components of the software is integrated to form the system. In this particular case we could test whether the end-to-end encryption used by WhatsApp works well with other features of the software.
+    \item Security testing (non-functional): this test checks how secure the software is regarding the sending of data and a malicious attack. This test includes: authorization, encryption, authentication.
+\end{itemize}
+
+\subsection{Installing the app from the app store}
+Prior to the app running on any device we must install it from the app store.
+\begin{itemize}
+    \item Smoke testing (Functional): this test would if critical functionalities are working fine before doing system testing. In this case it could be to check if the app is installed, if the device has enough space for the app, etc. 
+    \item Stress testing (Non-functional): the application must be efficient during installation. In this test the application is stressed with an extra work load to check efficiency. In this particular case to check the efficiency of installation. 
+\end{itemize}
+
+\subsection{Creation and usage of groups}
+\begin{itemize}
+    \item Acceptance testing (Functional): The application is tested based on the user's comfort and acceptance by considering ease of use. In this case how easy it is to add a person to the group, send messages and media, etc. 
+    \item Volume testing (Non-functional): how the application is able to handle data in the volume of real world environments' workload. Tested for reliability and correctness. 
+\end{itemize}
+
+\subsection{Searching for messages, contacts, media, etc.}
+\begin{itemize}
+    \item Unit testing (Functional): The buttons, actions, text, is functional, methods and functions work as intended. In this case if I want to search for a something all the functions work. 
+    \item Usability testing (Non-functional): checks for the simplicity of an applications' features, all functions and methods work correctly and as intended to be useful, this test allows for the testing and measurement of the ease of use of the software. 
+\end{itemize}
+
+\subsection{Languages}
+\begin{itemize}
+    \item Localization testing (Functional): the application is available in different languages as required by the client. 
+    \item Endurance testing (Non-functional): the program's endurance, consistent flow of load and reliability is tested. Checks for the endurance power of the software when loaded with a consistent workload. In this case something like: does the app need to translate everything?  
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+
