@@ -1,43 +1,44 @@
+from cuenta import cuenta 
+from load_data import get_rows
+from balance_general import balance_general
+from yaml import full_load, dump
 
-def razon_circulante(
-    activo_corriente, pasivo_corriente):
-    return activo_corriente/pasivo_corriente
+def main(db):
+    data_rows = get_rows()
+    master_cuentas,current = [],0
+    for i in data_rows:
 
-def prueba_de_acido(
-    activo_corriente, pasivo_corriente, inventario):
-    return (activo_corriente-inventario)/pasivo_corriente
+        instance = cuenta(
+            str(data_rows[current][0]),
+            data_rows[current][1],
+            data_rows[current][3], db
+        )
+        instance.sort_category()
+        instance.circulante()
+        master_cuentas.append(instance)
+        with open("accounting.yaml",encoding="UTF-8",mode="w") as file:
+            dump(db,file) # default_flow_style=True
+            file.close()
+        current += 1
+    print("balance general ... ")
+    balance = balance_general(master_cuentas)
+    balance.sort()
+    balance.write_balance()
+    
 
-def razon_de_rotacion_de_activos_fijos(
-    ventas, activos_fijos_netos):
-    return ventas/activos_fijos_netos
+if __name__ == "__main__":
+    with open("accounting.yaml",encoding="UTF-8",mode="r+") as file:
+        db = full_load(file)
+        file.close()
+    main(db)
 
-def razon_de_rotacion_de_activos_totales(
-    ventas, activos_totales):
-    return ventas/activos_totales
+    
 
-def rotacion_de_inventarios(
-    costo_de_ventas, inventario):
-    return costo_de_ventas/inventario
 
-def dias_de_venta_pendientes_de_cobro(
-    cuentas_por_cobrar, ventas_anuales):
-    return cuentas_por_cobrar/(ventas_anuales/360)
-
-def razon_de_deuda(
-    deuda_total, total_activo):
-    return deuda_total/total_activo
-
-def razon_de_cobertura_de_intereses(
-    utilidad_operativa, cargos_por_intereses):
-    # utilidad operativa es la que va antes de impuestos e interese.
-    return utilidad_operativa/cargos_por_intereses
-
-def margen_de_utilidad_sobre_ventas(
-    utilidad_neta_disp_para_accionistas, ventas 
-    ):
-    return utilidad_neta_disp_para_accionistas/ventas
-
-def razon_de_rentabilidad_basica(
-    utilidad_operativa, activo_total):
-    return utilidad_operativa/activo_total
+# Transform into dataframe
+# import pandas as pd
+# df = pd.DataFrame(data_rows)
+# # to print everything
+# pd.set_option("display.max_rows", None, "display.max_columns", None)
+# print(df)
 
