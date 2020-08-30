@@ -13,7 +13,7 @@ def f3(x):
     return x+6                      #f(x)=x+4
 
 plt.figure(1)                       #Abre una ventana para la 1ra grafica
-x = range(0, 23)                  #x toma los valores de -10 a 10
+x = range(0, 23)                    #x toma los valores de -10 a 10
 plt.title('Graficas de las tres rectas')
 plt.plot(x, [f1(i) for i in x])     #grafica de todas las funciones con los valores de x
 plt.plot(x, [f2(i) for i in x])

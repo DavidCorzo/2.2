@@ -1,0 +1,95 @@
+var progress_canvas = document.getElementById('progress');
+var progress_ctx = progress_canvas.getContext('2d');
+
+progress_canvas.width = 200;
+progress_canvas.height = 200;
+progress_canvas.style.width = "50px";
+progress_canvas.style.height = "50px";
+
+function drawProgress ( ) {
+
+	progress_canvas.style.top = 40 + boney['N']['xy'][1];
+
+	if (progress.length == 2) {
+		var now = new Date();
+	
+		if (now.getTime() < progress[1]) {
+			var p = (now.getTime() - progress[0])/(progress[1] - progress[0]);
+	
+			progress_ctx.clearRect( 0, 0, progress_canvas.width, progress_canvas.height );
+	
+			progress_ctx.drawImage( imageObj, 0, 0 );
+		
+			var imageData = progress_ctx.getImageData(0, 0, 200, 200);
+			var data = imageData.data;
+		
+			var b, c;
+			// ultimately precalculate the ranges
+			for (var y=0; y < 200; y++) {
+				c = 0;
+				for (var x=0; x < 200; x++) {
+					b = (200*y + x)*4;
+					if (Math.abs(data[b+1] - data[b]) > 5) {
+						c += 1;
+					}
+				}
+				if (c > 0) { break; }
+			}
+			var min_y = y;
+		
+			for (y=199; y >= 0; y--) {
+				c = 0;
+				for (x=0; x < 200; x++) {
+					b = (200*y + x)*4;
+					if (Math.abs(data[b+1] - data[b]) > 5) {
+						c += 1;
+					}
+				}
+				if (c > 0) { break; }
+			}
+			var max_y = y;
+			//console.log(min_y + ',' + max_y);
+		
+			for (y=min_y; y <= max_y; y++) {
+				for (x=0; x < 200; x++) {
+					b = (200*y + x)*4;
+					if (data[b+1] != data[b]) {
+						if (((task_icon[1] > 0) & (1 - (y - min_y)/(max_y - min_y) < p)) | ((task_icon[1] < 0) & ((y - min_y)/(max_y - min_y) > p))) {
+							data[b] = data[b+1];
+							data[b+1] = data[b+1];
+							data[b+2] = data[b+1];
+						} else {
+							data[b] = data[b+1];
+							data[b+1] = data[b+1];
+							data[b+2] = data[b+1];
+							if (data[b+1] > 200) {
+								data[b+3] = 50;
+							} else {
+								data[b+3] = 255;
+							}
+						}
+					}
+				}
+			}
+		
+			progress_ctx.putImageData(imageData, 0, 0);
+		
+			var seconds_per_pixel = (progress[1] - progress[0])/50;
+			if (seconds_per_pixel < 1000) { seconds_per_pixel = 1000; }
+			setTimeout(drawProgress, seconds_per_pixel);
+		} else {
+			window.location = 'islander.php?id=' + islander['id']
+		}
+	}
+}
+
+var imageObj = new Image();
+
+function showProgress() {
+	if (task_icon.length == 2) {
+		imageObj.onload = function () {
+			drawProgress();
+		}
+		imageObj.src = 'images/progress/' + task_icon[0] + '.png';
+	}
+}

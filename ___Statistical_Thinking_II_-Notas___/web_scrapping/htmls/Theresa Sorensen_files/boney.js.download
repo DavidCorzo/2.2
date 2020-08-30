@@ -1,0 +1,379 @@
+// http://content.gpwiki.org/index.php/OpenGL:Tutorials:Basic_Bones_System
+
+function Bone (name, r, angle, w, parent) {
+	this.name = name;
+	this.r = r;
+	this.angle = angle;
+	this.w = w;
+	this.xy = null;
+	this.d = null;
+	this.theta = null;
+	this.delta = 0.0;
+	this.dw = 1.0;
+	if (parent !== null) {
+		this.parent = boney[parent];
+		this.parent.children.push(this);
+	} else {
+		this.parent = null;
+	}
+	this.children = new Array();
+	this.points = new Array();
+	this.baggy = new Array();
+}
+
+var canvas = document.getElementById('skeleton');
+var context = canvas.getContext('2d');
+
+var pixelratio = 2;
+
+var blink = true;
+var blinktimer = 0;
+var headtimer = 40 + Math.floor(40*Math.random());
+var happy = 1;
+var scale = 1.3;
+var linewidth = 1;
+
+var about = {};
+
+skeletondata = [
+	['Root', 0, 0, 0, null],
+	['N', 20, -1.57, 10, 'Root'],
+	['H', 49, 0.05, 19, 'N'],
+	['ERPosition', 24, 3.14, 0, 'H'],
+	['ER', 16, -1.57, 5, 'ERPosition'],
+	['ELPosition', 24, -3.14, 0, 'H'],
+	['EL', 16, 1.57, 5, 'ELPosition'],
+	['SR', 45, 0.20, 8, 'Root'],
+	['SL', 45, 2.94, 8, 'Root'],
+	['C', 50, 1.57, 30, 'Root'],
+	['A', 60, 0, 30, 'C'],
+	['W', 30, 0, 30, 'A'],
+	['AR', 72, 1.15, 6, 'SR'],
+	['AL', 72, -1.15, 6, 'SL'],
+	['FR', 67, 0.05, 5, 'AR'],
+	['FL', 67, -0.05, 5, 'AL'],
+	['HandRight', 25, 0.2, 6, 'FR'],
+	['HandLeft', 25, -0.2, 6, 'FL'],
+	
+	['HR', 20, -1.57, 0, 'W'],
+	['HL', 20, 1.57, 0, 'W'],
+	['TR', 95, 1.47, 14, 'HR'],
+	['TL', 95, -1.47, 14, 'HL'],
+	['LR', 100, 0.05, 11, 'TR'],
+	['LL', 100, -0.05, 11, 'TL'],
+	['AnkleRight', -11, -1.57, 0, 'LR'],
+	['AnkleLeft', -11, 1.57, 0, 'LL'],
+	['HeelRight', 8, 1.57, 0, 'AnkleRight'],
+	['HeelLeft', 8, -1.57, 0, 'AnkleLeft'],
+	['FootRight', 42, -1.3, 8, 'HeelRight'],
+	['FootLeft', 42, 1.57, 8, 'HeelLeft']
+]
+
+var boney = [];
+
+for (var i=0; i < skeletondata.length; i++){
+	boney[skeletondata[i][0]] = new Bone(
+		skeletondata[i][0], skeletondata[i][1], skeletondata[i][2], skeletondata[i][3],skeletondata[i][4] );
+}
+
+
+CanvasRenderingContext2D.prototype.moveToPoint = function (p) {
+	this.moveTo(p[0], p[1]);
+}
+
+CanvasRenderingContext2D.prototype.lineToPoint = function (p) {
+	this.lineTo(p[0], p[1]);
+}
+
+function calculateBones ( b, xy, angle ) {
+	b.xy = xy;
+	b.theta = angle;
+	
+	for (var i=0; i < b.children.length; i++) {
+		theta = angle + b.children[i].angle + b.children[i].delta;
+		ct = scale*Math.cos(theta);
+		st = scale*Math.sin(theta);
+		b.children[i].d = [ct, st];
+		xy1 = [xy[0] + b.children[i].r*ct, xy[1] + b.children[i].r*st];
+		
+		if (b.children[i].w > 0) {
+			var w = b.children[i].w*b.children[i].dw;
+			b.children[i].points = new Array();
+			b.children[i].points.push([xy[0] + st*w, xy[1] - ct*w]);
+			b.children[i].points.push([xy[0] - st*w, xy[1] + ct*w]);
+			b.children[i].points.push([xy1[0] - st*w, xy1[1] + ct*w]);
+			b.children[i].points.push([xy1[0] + st*w, xy1[1] - ct*w]);
+		}
+
+		calculateBones (b.children[i], xy1, theta);
+	}
+}
+
+
+// calculate the point proportion a between p and q
+function affinePoint (p, q, a) {
+	return [ p[0] + a*(q[0] - p[0]), p[1] + a*(q[1] - p[1]) ];
+}
+
+function aPoint (p, q, a) {
+	return [ p[0] + a*(q[0] - p[0]), p[1] + a*(q[1] - p[1]) ];
+}
+
+function drawWords ( ws ) {
+	if (ws.length == 5) {
+		var b = ws[0];
+		var p = ws[3];
+		var x = boney[b].parent.xy[0] + (p[1]/2)*boney[b].d[0]*boney[b].r - p[0]*boney[b].d[1]*boney[b].w*boney[b].dw;
+		var y = boney[b].parent.xy[1] + (p[1]/2)*boney[b].d[1]*boney[b].r + p[0]*boney[b].d[0]*boney[b].w*boney[b].dw;
+	
+		context.fillStyle = ws[2];
+		context.font = ws[1];
+		context.fillText( ws[4], x - context.measureText(ws[4]).width/2, y );
+	}
+} 
+
+function drawPoint ( b, p ) {
+	var x, y;
+	context.beginPath();
+	x = boney[b].parent.xy[0] + (p[1]/2)*boney[b].d[0]*boney[b].r - p[0]*boney[b].d[1]*boney[b].w*boney[b].dw;
+	y = boney[b].parent.xy[1] + (p[1]/2)*boney[b].d[1]*boney[b].r + p[0]*boney[b].d[0]*boney[b].w*boney[b].dw;
+	context.arc(x,y,1,0,2*Math.PI);
+	context.fill();
+}
+
+function drawFreckles ( frex ) {
+	context.globalAlpha = 0.6;
+	context.fillStyle = "#b78967";
+	for (var j=0; j < frex.length; j++) {
+		drawPoint( 'H', frex[j] );
+	}
+	context.globalAlpha = 1.0;
+}
+
+function drawIcon ( icon ) {
+	context.save();
+	var iconscale = 0.5*0.25*scale;
+	context.translate(boney['H'].xy[0], boney['H'].xy[1]);
+	context.rotate(boney['H'].angle);
+	context.drawImage(iconObj,  - 0.5*iconscale*218,  - 0.8*iconscale*160, iconscale*218, iconscale*160);
+	context.restore();
+} 
+
+function drawPet (  ) {
+	document.getElementById('thepet').style.visibility = 'visible';
+} 
+
+function makeItem ( f1, f2, a ) {
+	var f = [];
+	for (var j=0; j < f1.length; j++) {
+	    if (typeof f1[j] === 'string') {
+		    f.push( f1[j] );
+	    } else {
+	    	f.push( [(1-a)*f1[j][0] + a*f2[j][0], (1-a)*f1[j][1] + a*f2[j][1]] );
+	    }
+	}
+	return f;
+}
+
+// draw using an internal coordinate system for a bone (particularly the H)
+function drawFeatures ( feature, color ) {
+	if (feature in islander) {
+		if (typeof islander[feature] === 'string') {
+			var item = bodies[ islander[feature] ];
+		} else {
+			//console.log( islander[feature][0] + " -> " + islander[feature][1]);
+			var item = makeItem( bodies[islander[feature][0]], bodies[islander[feature][1]], islander[feature][2] );
+		}
+		
+		var b = 'H';
+		var t = 0.3;
+		var points = [];
+		if (typeof color === 'undefined') { color = 'pink'; }
+
+		var stroke = true;
+		var fill = true;
+		var closed = true;
+
+		for (var i=0; i<item.length; i++) {
+			if (typeof item[i] == 'string') {
+				if (item[i] == 'draw') {
+					if (color !== undefined) {
+						context.fillStyle = color;
+					}
+					drawSpline(context, points, t, closed, stroke, fill);
+					points = [];
+					stroke = true;
+					fill = true;
+					closed = true;
+				} else if (item[i] == 'open') {
+					closed = false;
+				} else if (item[i] == 'nostroke') {
+					stroke = false;
+				} else if (item[i] == 'nofill') {
+					fill = false;
+				} else if (item[i].substr(0,1) == "#") {
+					color = item[i];
+				} else if (item[i] in islander) {
+					color = islander[item[i]];
+				} else if (item[i].substr(0,2) == "SW") {
+					t = parseFloat(item[i].substr(2));
+				} else {
+					b = item[i];
+				}
+			} else {
+				var p = item[i];
+				if (b == "H") {
+					var x = boney[b].parent.xy[0] + (p[1]/2)*boney[b].d[0]*boney[b].r - p[0]*boney[b].d[1]*boney[b].w*boney[b].dw;
+					var y = boney[b].parent.xy[1] + (p[1]/2)*boney[b].d[1]*boney[b].r + p[0]*boney[b].d[0]*boney[b].w*boney[b].dw;
+				} else {
+					var x = boney[b].parent.xy[0] + (p[1]/2)*boney[b].d[0]*boney[b].r - p[0]*boney[b].d[1]*boney[b].w*boney[b].dw;
+					var y = boney[b].parent.xy[1] + (p[1]/2)*boney[b].d[1]*boney[b].r + p[0]*boney[b].d[0]*boney[b].w*boney[b].dw;
+				}
+				points.push( [x, y] );
+			}
+		}
+	}
+}
+
+
+function drawSkeleton ( ) {
+	context.clearRect( 0, 0, canvas.width, canvas.height );
+	if (islander.alive == '1') {
+		context.globalAlpha = 1.0;
+	} else {
+		context.globalAlpha = 1.0;
+		canvas.style.opacity = 0.7;
+	}
+	
+	if (islander.sex == "Female"){
+	    boney['SR'].r=35; boney['SL'].r=35;
+	    boney['AR'].r=62; boney['AL'].r=62;
+	    boney['FR'].r=75; boney['FL'].r=75;
+	    boney['N'].r=12;
+	} else {
+	    boney['SR'].r=45; boney['SL'].r=45;
+	    boney['AR'].r=72; boney['AL'].r=72;
+	    boney['FR'].r=67; boney['FL'].r=67;
+	    boney['N'].r=20;
+	}
+
+	boney['A'].r = 60 + 20*islander.hr;
+	boney['TR'].r = 95 - 10*islander.hr;
+	boney['TL'].r = 95 - 10*islander.hr;
+	boney['LR'].r = 100 - 10*islander.hr;
+	boney['LL'].r = 100 - 10*islander.hr;
+
+	scale = 1.3;
+	calculateBones( boney['Root'], [120, 100], 0 );
+	
+	var pixels = boney['FootRight'].xy[1] - boney['N'].xy[1];
+	scale = 1.1*islander.pixels/pixels;
+	
+	if (scale < 1) {
+		boney['H'].w = 19/scale;
+		boney['H'].r = 49/scale;
+		boney['ERPosition'].r = 24/scale;
+		boney['ELPosition'].r = 24/scale;
+		boney['ER'].r = 16/scale;
+		boney['EL'].r = 16/scale;
+		boney['ER'].w = 5/scale;
+		boney['EL'].w = 5/scale;
+	}
+	
+	var hw = boney['H'].w;
+	if (!(hw in islander)) islander.hw = 1;
+	
+	boney['H'].w = hw*islander.hw;
+	
+	scale = 1.18*scale;
+	var mediascale = 1.0;
+	if (window.innerWidth < 600) { mediascale = 0.8; }
+	
+	calculateBones( boney['Root'], [120, 140 ], 0 );
+	calculateBones( boney['Root'], [120, 165 - boney['H'].xy[1] ], 0 );
+	canvas.width = 240*pixelratio;
+	canvas.style.width = 240 * mediascale + 'px';
+	canvas.height = Math.floor(boney['FootRight'].xy[1] + 10)*pixelratio;
+	canvas.style.height = Math.floor(boney['FootRight'].xy[1] + 10) * mediascale + 'px';
+	context.setTransform(pixelratio, 0, 0, pixelratio, 0, 0);
+	context.lineWidth = 1;
+	
+	drawFeatures( 'back', islander.haircolour );
+	drawFeatures( 'skin', islander.skincolour );
+	drawFeatures( 'bottom', islander.bottomcolour );
+	if (islander.shirtoff != 1) 
+		drawFeatures( 'top', islander.topcolour );
+	
+	if ( 'words' in islander ) { drawWords ( islander.words ); }
+
+	if ((islander.asleep == 0) & (islander.alive == 1)) { 
+		if ( 'backhat' in islander ) { 
+			drawFeatures( 'backhat', islander.backhatcolour );
+		}
+	}
+
+	drawFeatures( 'ears', islander.skincolour );
+	drawFeatures( 'head', islander.skincolour );
+
+	boney['H'].w = hw;
+	
+	if ('freckles' in islander) { drawFreckles( islander.freckles ); }
+	
+	drawFeatures( 'nose' );
+	drawFeatures( islander.mood );
+	if (blink) { drawFeatures( 'blink' ); } else { drawFeatures( 'eyes' ); }
+	drawFeatures ( 'wrinkle' );
+	
+	drawFeatures( 'brows', islander.haircolour );
+
+	
+	// assume they remove glasses while sleeping or dead?
+	if ((islander.asleep == 0) & (islander.alive == 1)) { 
+		drawFeatures( 'glasses' );
+	}
+	
+	boney['H'].w = hw*islander.hw;
+	drawFeatures( 'hair', islander.haircolour );
+	if ((islander.asleep == 0) & (islander.alive == 1)) { 
+		if ( 'hat' in islander ) { 
+			drawFeatures( 'hat', islander.hatcolour );
+			if ('haticon' in islander) { drawIcon( islander.haticon ); }
+		}
+		if ('pet' in islander) { drawPet(); }
+	}
+	boney['H'].w = hw;
+
+}
+
+function doAnimate( ) {
+	if (islander.asleep == 0) {
+		if (blinktimer == 0) {
+			if (blink) {
+				blink = false;
+				drawSkeleton();
+				blinktimer = 4;
+			} else {
+				blink = true;
+				drawSkeleton();
+				blinktimer = 0;
+			}
+		} else {
+			blinktimer -= 1;
+		}
+
+		if (headtimer == 0) { 
+			boney['H'].angle = -boney['H'].angle;
+			drawSkeleton();
+			headtimer = 8 + Math.floor(8*Math.random());
+		} else {
+			headtimer -= 1;
+		}
+
+		if (blink) { setTimeout(doAnimate, 150 + Math.floor(100*Math.random())); }
+		else { setTimeout(doAnimate, 750 + Math.floor(500*Math.random())); }
+	} else {
+		blink = true;
+		drawSkeleton();
+	}
+}
+

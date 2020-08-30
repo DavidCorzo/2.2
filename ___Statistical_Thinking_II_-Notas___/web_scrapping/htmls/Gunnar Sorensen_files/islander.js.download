@@ -1,0 +1,369 @@
+function change_tab (t) {
+	if (t != current_tab) {
+		if (current_tab != '') {
+			document.getElementById(current_tab).style.display = "none";
+			document.getElementById(current_tab+'tab').className = "lh";
+		}
+		current_tab = t;
+		sessionStorage.setItem( pageid+'tab', current_tab );
+		document.getElementById(current_tab).style.display = "block";
+		document.getElementById(current_tab+'tab').className = "lhselected";
+		document.getElementById('islander').className = current_tab;
+		if ((t == "t3") & (consented) & (awake) & (available)) {
+			document.getElementById('userinput').style.display = 'block';
+			document.getElementById('chatbox').focus();
+		}
+		if ((t == "t2") & (task_icon.length == 0) & (consented == 1)) {
+			document.getElementById('task_menu').style.display = 'block';
+			document.getElementById('detailbox').style.display = 'none';
+		} else {
+			document.getElementById('task_menu').style.display = 'none';
+			var obtain = document.getElementById('obtain');
+			if (typeof(obtain) != 'undefined' && obtain != null) {
+				obtain.style.display = 'block';
+			}
+		}
+	}
+}
+
+
+function dochat ( ){
+	thechat = document.getElementById("chatbox").value;
+	
+	if (thechat.length > 0) {
+		document.body.style.cursor = "wait";
+
+		var x = document.createElement("div");
+		x.innerHTML = thechat;
+		x.className = "chatuser";
+		document.getElementById("conversation").appendChild(x);
+
+		document.getElementById("chatbox").value = "";
+	
+		var url = "alice.php?" + chatid + "&" + thechat;
+			
+		if (window.XMLHttpRequest) {
+			xhr = new XMLHttpRequest();
+		}
+		else {
+			if (window.ActiveXObject) {
+				try {
+					xhr = new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				catch (e) { }
+			}
+		}
+
+		if (xhr) {
+			xhr.onreadystatechange = showAction;
+			xhr.open("GET", url, true);
+			xhr.send(null);
+		}
+		else {
+			alert("Sorry, there was a problem");
+		}
+	}
+}
+
+function showAction() {
+	if (xhr.readyState == 4) {
+		if (xhr.status == 200) {
+			var x = document.createElement("div");
+			var lines = xhr.responseText.split("\n");
+			if (lines[0] == "login") {
+				window.location = "login.php";
+			}
+			var redraw = false;
+			var response = "";
+			for (var j=0; j < lines.length; j++) {
+				if (lines[j].substr(0,1) == "<") {
+					response = response + lines[j] + "\n";
+				} else {
+					var bits = lines[j].split('=');
+					if (bits.length == 2) {
+						islander[bits[0]] = bits[1];
+						redraw = true;
+					} else {
+						response = response + lines[j] + "\n";
+					}
+				}
+			}
+			x.innerHTML = response;
+			x.className = "chatbot";
+			document.getElementById("conversation").appendChild(x);
+			document.getElementById('chatbox').focus();
+			if (redraw) {
+				drawSkeleton();
+			}
+		}
+		document.body.style.cursor = "default";
+	}
+}
+
+function getConsent ( ) {
+	document.getElementById("obtain").remove();
+	
+	var url = "php/consent.php?id=" + id;
+	xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function () {
+		if (xhr.readyState==4 && xhr.status==200) {
+			var consentOutcome = xhr.responseText.split(";");
+			if (consentOutcome[0] == "accept") {
+				document.getElementById('detailbox').style.display = "none";
+				document.getElementById('task_menu').style.display = "block";
+				if (awake) { 
+					document.getElementById('idetail').style.display = "none";
+					document.getElementById('userinput').style.display = "block"; 
+				}
+				
+				document.getElementById("contact").innerHTML = 'Remove ' + given;
+				consented = 1;
+			}
+			var h = document.createElement("div");
+			h.setAttribute('class', "taskresult");
+			var i = document.createElement("img");
+			i.setAttribute('class', "taskresult");
+			i.setAttribute('src', "images/icons/misc.png");
+			h.appendChild(i);
+			i = document.createElement("div");
+			i.setAttribute('class', "taskresulttd");
+			i.innerHTML = consentOutcome[1];
+			h.appendChild(i);
+			i = document.createElement("div");
+			i.setAttribute('class', "taskresulttask");
+			i.innerHTML = consentOutcome[2];
+			h.appendChild(i);
+			document.getElementById('t2').insertBefore(h, document.getElementById('task_menu'));
+			
+			//document.getElementById("idetail").innerHTML = consentOutcome[2];
+		}
+	}
+	xhr.open("GET", url, true);
+	xhr.send(null);
+}
+
+function startTask ( c ) {
+	document.body.style.cursor = "wait";
+
+	var url = "task.php?id=" + id + "&code=" + c;
+	document.getElementById('task_menu').style.display = "none";
+	document.getElementById('idetail').innerHTML = given + " is unable to chat.";
+	document.getElementById('idetail').style.display = 'block';
+	document.getElementById('userinput').style.display = 'none'; 
+	available = 0;
+	window.scrollTo(0, 0);
+	xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = showTask;
+	xhr.open("GET", url, true);
+	xhr.send(null);
+}
+
+function showTask() {
+	if (xhr.readyState == 4) {
+		if (xhr.status == 200) {
+			var bits = xhr.responseText.split(",");
+			if (bits.length >= 5) {
+				progress = [ parseFloat(bits[0]) + delta, parseFloat(bits[1]) + 1000 + delta ];
+				document.getElementById("detail").innerHTML = islander['name'] + ' is currently ' + bits.slice(4).join(',') + '...';
+				document.getElementById('detailbox').style.display = 'block';
+				task_icon = [ bits[2], parseInt(bits[3]) ];
+				showProgress();
+			} else {
+				//document.getElementById("detail").innerHTML = 'Error: ' + bits[0];
+				//document.getElementById('task_menu').style.display = "block";
+			}
+		}
+		document.body.style.cursor = "default";
+	}
+}
+
+function toggle( m ) {
+	var submenu = document.getElementById("tasks" + m);
+	if (submenu.style.display == "block") submenu.style.display = "none";
+	else submenu.style.display = "block";
+}
+
+var xhr_contact;
+
+function addContact ( ){
+	document.body.style.cursor = "wait";
+	
+	var url = "php/contact.php?id=" + id;
+	
+	xhr_contact = new XMLHttpRequest();
+	if (xhr_contact) {
+		xhr_contact.onreadystatechange = showContact;
+		xhr_contact.open("GET", url, true);
+		xhr_contact.send(null);
+	}
+}
+
+function showContact() {
+	if (xhr_contact.readyState == 4) {
+		if (xhr_contact.status == 200) {
+			if (xhr_contact.responseText == "added") {
+				document.getElementById("contact").innerHTML = 'Remove ' + given;
+			} else {
+				document.getElementById("contact").innerHTML = 'Add ' + given;
+			}
+		}
+		
+		document.body.style.cursor = "default";
+	}
+}
+
+function drawGenes ( g, aid, colours ) {
+	var gCanvas = document.getElementById('genes' + aid);
+	var gCtx = gCanvas.getContext('2d');
+
+	var k = 0;
+	var h;
+	for (var y=0; y < 16; y++) {
+		for (var x=0; x < 16; x++) {
+			h = colours[k];
+			if (g < 2) {  gCtx.fillStyle = "rgb("+h+","+h+","+h+")"; }
+			else {  
+				h = h/360;
+				gCtx.fillStyle = "hsl("+Math.round(120*(1-h))+",100%," + (100 * Math.abs(h - 0.5))+ "%)"; 
+			} // "hsl("+h+",100%,50%)";
+			gCtx.fillRect(16*x, 16*y, 15, 15);
+			k += 1;
+		}
+	}
+}
+
+function drawHypnogram ( aid, data ) {
+	var gCanvas = document.getElementById('hypnogram' + aid);
+	var gCtx = gCanvas.getContext('2d');
+
+	var j, h = 0, m, w = 32;
+	var cwidth = 30 + w*Math.ceil((data[data.length-2]+1)/w);
+	gCanvas.width = 2*cwidth;
+	gCanvas.height = 200;
+	gCanvas.style.width = cwidth;
+	gCanvas.style.maxWidth = cwidth;
+	//gCanvas.style.height = "100px";
+	gCtx.setTransform(2, 0, 0, 2, 0, 0);
+
+
+	gCtx.font="normal 12px Arial";
+
+	while (w*(h-1) <= data[data.length-2]) {
+		gCtx.beginPath();
+		gCtx.strokeStyle = '#ddd';
+		gCtx.moveTo(20 + w*h, 10);
+		gCtx.lineTo(20 + w*h, 82);
+		gCtx.stroke();
+		m = gCtx.measureText(h);
+		gCtx.strokeStyle = 'black';
+		gCtx.fillText( h, 20 + 32*h - m.width/2, 97 );
+		h += 1;
+	}
+	var states = [ 'W', 'R', '1', '2', '3' ];
+	gCtx.strokeStyle = '#ddd';
+	for (j=0; j < states.length; j++) {
+		gCtx.beginPath();
+		gCtx.moveTo(20, 10 + 18*j);
+		gCtx.lineTo(20 + w*(h-1), 10 + 18*j);
+		gCtx.stroke();
+	}
+
+	gCtx.beginPath();
+	gCtx.strokeStyle = 'black';
+	gCtx.moveTo(20,10);
+	for (j=0; j < data.length -2; j += 2) {
+		gCtx.lineTo(20 + data[j], 10 + 18*data[j+1]);
+		gCtx.lineTo(20 + data[j+2], 10 + 18*data[j+1]);
+	}
+	gCtx.lineTo(20 + data[data.length-2], 10 + 18*data[data.length-1]);
+	if (data[data.length-1] == 0) { gCtx.lineTo(20 + w*(h-1), 10); }
+	gCtx.stroke();
+	
+	for (j=0; j < states.length; j++) {
+		m = gCtx.measureText(states[j]);
+		gCtx.fillText( states[j], 8 - m.width/2, 14 + 18*j );
+	}
+}
+
+function drawAudiogram ( aid, data ) {
+	var gCanvas = document.getElementById('audiogram'+aid);
+	var gCtx = gCanvas.getContext('2d');
+
+	gCanvas.width = 600;
+	gCanvas.height = 600;
+	//gCanvas.style.width = "300px";
+	//gCanvas.style.height = "300px";
+	gCtx.setTransform(2, 0, 0, 2, 0, 0);
+
+	var j, i, m;
+
+	var labels = [250, 500, 1000, 2000, 4000, 8000];
+
+	gCtx.font="normal 12px Arial";
+
+	for (j=0; j < 14; j++) {
+		gCtx.beginPath();
+		gCtx.strokeStyle = '#bbb';
+		gCtx.moveTo(30, 25 + 20*j);
+		gCtx.lineTo(294, 25 + 20*j);
+		gCtx.stroke();
+		m = gCtx.measureText(10*(j-1));
+		gCtx.strokeStyle = 'black';
+		gCtx.fillText( 10*(j-1), 25 - m.width, 25 + 20*j + 4 );
+	}
+	var solids = [0,1,3,5,7,9,11,12];
+	var dasheds = [6,8,10];
+	var labeled = [1,3,5,7,9,11];
+	
+	for (j=0; j < 13; j++) {
+		if (solids.includes(j) || dasheds.includes(j)) {
+			gCtx.beginPath();
+			gCtx.strokeStyle = '#aaa';
+			gCtx.moveTo(30 + 22*j, 25);
+			gCtx.lineTo(30 + 22*j, 285);
+			if (dasheds.includes(j)) {
+				gCtx.setLineDash([2,2]);
+			} else {
+				gCtx.setLineDash([]);
+			}
+			gCtx.stroke();
+		}
+		if (labeled.includes(j)) {
+			m = gCtx.measureText(labels[(j-1)/2]);
+			gCtx.strokeStyle = 'black';
+			gCtx.fillText( labels[(j-1)/2], 30 + 22*j - m.width/2, 20 );
+		}
+	}
+	
+	for (i=0; i < 2; i++) {
+		if (i == 0) {
+			gCtx.strokeStyle = '#00f';
+		} else {
+			gCtx.strokeStyle = '#f00';
+		}
+		gCtx.beginPath();
+		gCtx.moveTo(30 + 22*labeled[0], 25 + 2*(data[2*i+0]+10));
+		for (j=1; j < 8; j++) {
+			gCtx.lineTo(30 + 22*labeled[j], 25 + 2*(data[2*i+j]+10));
+		}
+		gCtx.stroke();
+		
+		for (j=0; j < 8; j++) {
+			if (i == 0) {
+				gCtx.beginPath();
+				gCtx.arc(30 + 22*labeled[j], 25 + 2*(data[2*i+j]+10), 5, 0, 2*Math.PI);
+				gCtx.stroke();
+			} else {
+				gCtx.beginPath();
+				gCtx.moveTo(30 + 22*labeled[j] - 4, 25 + 2*(data[2*i+j]+10) - 4);
+				gCtx.lineTo(30 + 22*labeled[j] + 4, 25 + 2*(data[2*i+j]+10) + 4);
+				gCtx.stroke();
+				gCtx.beginPath();
+				gCtx.moveTo(30 + 22*labeled[j] - 4, 25 + 2*(data[2*i+j]+10) + 4);
+				gCtx.lineTo(30 + 22*labeled[j] + 4, 25 + 2*(data[2*i+j]+10) - 4);
+				gCtx.stroke();
+			}
+		}
+
+	}
+}

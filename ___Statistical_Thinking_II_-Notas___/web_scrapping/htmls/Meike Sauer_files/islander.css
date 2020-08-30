@@ -1,0 +1,135 @@
+/* div.chatdate { font-size: 100%; height: 32px; line-height: 35px; margin-top: 20px; padding-left: 30px;
+	background-image: url('../images/icons/chat.png'); background-size: auto 32px; background-repeat: no-repeat; } */
+div#conversation { padding-left: 60px; margin-top: 0px; }
+div#userinput { padding-left: 60px; }
+p#detail { margin-left: 60px; padding-bottom: 5px }
+p#idetail { margin-left: 60px; margin-top: 0px; display: block; }
+div.chatdate { font-size: 100%; height: 32px; line-height: 35px; margin-bottom: 0px; }
+div.chatuser { font-weight: bold; font-size: 100%; padding-bottom: 10px; }
+div.chatbot { font-size: 100%; padding-bottom: 10px; text-align: left; }
+input#chatbox { height: 30px; font-size: 100%; margin-top: 10px; width: 340px; }
+.diagnostics { display: block; margin-bottom: 10px;  font-size: 90%;}
+span.task { cursor: pointer; color: #55c; }
+div.task { margin-left: 60px; margin-bottom: 5px; }
+div.submenu { height: 50px; line-height: 50px; font-weight: bold; margin-bottom: 0px; margin-top: 0px; cursor: pointer; user-select: none; }
+div.submenu:hover { color: #3A7495; }
+img.submenu { height: 50px; padding-right: 10px;  float: left; }
+img.taskresult { height: 50px; padding-right: 10px; float: left; }
+div.submenutasks { margin-top: -10px;  }
+
+div.taskresult { margin-bottom: 20px; margin-top: 10px; min-height: 50px; }
+div.taskresulttd { margin-left: 60px; padding-bottom: 5px; }
+div.taskresulttask{ margin-left: 60px; padding-bottom: 5px; }
+div.taskresultresult { font-weight: bold; margin-left: 60px; font-size: 100%; }
+div.taskresultquestion { font-style: italic; margin-left: 60px; font-size: 100%; padding-bottom: 5px; text-align: left; }
+div.taskresultresponse { font-weight: bold; margin-left: 60px; font-size: 100%; padding-bottom: 10px; }
+
+canvas.hypnogram { background-color: #eee; border: solid 1px #fff; padding: 2px; height: 100px;}
+canvas.audiogram { background-color: #eee; border: solid 1px #fff; padding: 2px; height: 300px; width: 300px;}
+
+div.taskreportcard { margin-left: 60px; margin-top: 10px; width: 230px; background-color: #eee; border: solid 1px #fff; padding-bottom: 10px;}
+div.taskrcschool { width: 220px; text-align: center;  padding: 5px; margin-top: 10px; font-weight: bold; }
+div.taskrcy { width: 220px; text-align: center;  padding: 5px;}
+div.taskrct { width: 220px; text-align: center; font-size: 80%;  padding: 5px;}
+div.taskrcr { width: 200px; padding-left: 8px; padding-right: 8px;}
+div.taskrcs { width: 165px; text-align: left; padding: 5px; display: inline-block; }
+div.taskrcg { width: 10px; text-align: left; padding: 5px; font-weight: bold; font-size: 120%; display: inline-block;  }
+
+div.taskrfr { width: 215px; padding-left: 15px; padding-right: 15px;}
+div.taskrfood {  width: 135px; text-align: left; padding: 5px; display: inline-block;  }
+div.taskrfoodweight { width: 50px; text-align: right; padding: 5px; font-size: 100%; display: inline-block;  }
+
+div.taskrdegree { width: 220px; text-align: center; padding: 5px;}
+div.taskrgpa { width: 220px; text-align: center;  padding: 5px; margin-top: 10px; font-weight: bold; font-size: 120%;  }
+
+tr { vertical-align: top; }
+th { text-align: left; padding-left: 0px; padding-top: 10px; }
+td { text-align: left; padding-left: 0px; padding-bottom: 5px;}
+table.tax { margin: 0px 0px 0px 0px; border: none; width: 200px; margin: 10px 5px 5px 20px; font-size: 80%; }
+th.taxyear { width: 30px; text-align: center;}
+th.taxtax { width: 50px; text-align: right; }
+th.taxwealth { width: 70px; text-align: right;   }
+td.taxyear { width: 30px; text-align: center; }
+td.taxtax { width: 50px; text-align: right; }
+td.taxwealth { width: 70px; text-align: right; }
+
+
+div.timelineevent {
+	padding: 0px;
+}
+div.storydate {
+	padding-top: 10px;
+	padding-bottom: 2px;
+	font-size: 100%;
+	font-weight: bold;
+}
+div.storyevent {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 15px;
+	font-size: 100%;
+	display: block;
+}
+div.storytext {
+	font-size: 100%;
+	text-align: left;
+	display: table-cell;
+}
+div.summarydate {
+	padding-top: 10px;
+	padding-bottom: 2px;
+	font-size: 100%;
+	font-weight: bold;
+}
+div.summaryevent {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 15px;
+	font-size: 100%;
+}
+div.storyday {
+	display: table-cell;
+	width: 70px;
+}
+div.content_tab {
+    display: none;
+    float: left;
+    width: 400px;
+    margin-left: 0px;
+    margin-right: 0px;
+    border: none;
+}
+#progress { width:50px; height:50px; float: left; }
+#skeleton {
+	 border: none;
+	 /* position: absolute; top: 0px; left: 0px; */
+}
+
+div#detailbox { display: none; }
+div#obtain { text-align: center; margin-top: 20px; }
+div#islander { width: 240px; display: block; float: right; margin-top: 20px; position: relative; }
+div#tabmenu { width: 390px; }
+div#displayed  { width: 720px; margin-left: auto; margin-right: auto;}
+img#thepet {  height: 200px; position: absolute; bottom:20px; left:200px; visibility: hidden; }
+
+@media only screen and (max-width: 600px) {
+	table { width: 100%; }
+	div#tabmenu { width: 300px; }
+	div#islander { width: 192px; float: none; margin-left: auto; margin-right: auto; margin-top: 0px; }
+	div#displayed { width: 100%; }
+	div.content_tab { float: none; width: 100%; text-align: left; }
+	button.lh { width: 90px; }
+	button.lhselected { width: 90px; }
+	div#islander.t2 { display: none; }
+	div#islander.t3 { display: none; }
+	div.taskresultquestion { width:80%;  }
+	div.summarydate { text-align: center; }
+	div.summaryevent { text-align: center; padding-left: 0px; }
+	img#thepet { height: 150px; left: 170px;}
+	input#chatbox { width: 90%; }
+	div#userinput { padding-left: 20px; }
+	div#conversation { padding-left: 20px;  }
+	p#idetail { text-align: center; margin-left: 0px; }
+	canvas.hypnogram { width: 95%; height: auto; }
+	canvas.audiogram { width: 95%; height: auto; }
+}
