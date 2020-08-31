@@ -376,6 +376,28 @@ INPUT C:\Program Files\MiKTeX 2.9\tex\latex\babel-spanish\spanish.ldf
 INPUT C:\Program Files\MiKTeX 2.9\tex\latex\babel-spanish\spanish.ldf
 INPUT C:\Program Files\MiKTeX 2.9\tex\latex\base\inputenc.sty
 INPUT C:\Program Files\MiKTeX 2.9\tex\latex\base\inputenc.sty
+INPUT C:\Program Files\MiKTeX 2.9\tex\latex\float\float.sty
+INPUT C:\Program Files\MiKTeX 2.9\tex\latex\float\float.sty
+INPUT C:\Program Files\MiKTeX 2.9\tex\latex\tools\multicol.sty
+INPUT C:\Program Files\MiKTeX 2.9\tex\latex\tools\multicol.sty
+INPUT C:\Program Files\MiKTeX 2.9\tex\latex\wrapfig\wrapfig.sty
+INPUT C:\Program Files\MiKTeX 2.9\tex\latex\wrapfig\wrapfig.sty
+INPUT C:\Program Files\MiKTeX 2.9\tex\latex\blindtext\blindtext.sty
+INPUT C:\Program Files\MiKTeX 2.9\tex\latex\blindtext\blindtext.sty
+INPUT C:\Program Files\MiKTeX 2.9\tex\latex\tools\xspace.sty
+INPUT C:\Program Files\MiKTeX 2.9\tex\latex\tools\xspace.sty
+INPUT C:\Program Files\MiKTeX 2.9\tex\latex\enumitem\enumitem.sty
+INPUT C:\Program Files\MiKTeX 2.9\tex\latex\enumitem\enumitem.sty
+INPUT C:\Program Files\MiKTeX 2.9\tex\latex\url\url.sty
+INPUT C:\Program Files\MiKTeX 2.9\tex\latex\url\url.sty
+INPUT C:\Program Files\MiKTeX 2.9\tex\latex\breakurl\breakurl.sty
+INPUT C:\Program Files\MiKTeX 2.9\tex\latex\breakurl\breakurl.sty
+INPUT C:\Program Files\MiKTeX 2.9\tex\latex\xkeyval\xkeyval.sty
+INPUT C:\Program Files\MiKTeX 2.9\tex\latex\xkeyval\xkeyval.sty
+INPUT C:\Program Files\MiKTeX 2.9\tex\generic\xkeyval\xkeyval.tex
+INPUT C:\Program Files\MiKTeX 2.9\tex\generic\xkeyval\xkvutils.tex
+INPUT C:\mytexmf\tex\latex\iftex\ifpdf.sty
+INPUT C:\mytexmf\tex\latex\iftex\ifpdf.sty
 INPUT C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\hyperref.sty
 INPUT C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\hyperref.sty
 INPUT C:\Program Files\MiKTeX 2.9\tex\generic\pdftexcmds\pdftexcmds.sty
@@ -400,8 +422,6 @@ INPUT C:\Program Files\MiKTeX 2.9\tex\generic\intcalc\intcalc.sty
 INPUT C:\Program Files\MiKTeX 2.9\tex\generic\intcalc\intcalc.sty
 INPUT C:\Program Files\MiKTeX 2.9\tex\generic\etexcmds\etexcmds.sty
 INPUT C:\Program Files\MiKTeX 2.9\tex\generic\etexcmds\etexcmds.sty
-INPUT C:\Program Files\MiKTeX 2.9\tex\latex\url\url.sty
-INPUT C:\Program Files\MiKTeX 2.9\tex\latex\url\url.sty
 INPUT C:\Program Files\MiKTeX 2.9\tex\generic\bitset\bitset.sty
 INPUT C:\Program Files\MiKTeX 2.9\tex\generic\bitset\bitset.sty
 INPUT C:\Program Files\MiKTeX 2.9\tex\generic\bigintcalc\bigintcalc.sty
@@ -414,8 +434,6 @@ INPUT C:\Program Files\MiKTeX 2.9\tex\latex\rerunfilecheck\rerunfilecheck.sty
 INPUT C:\Program Files\MiKTeX 2.9\tex\latex\rerunfilecheck\rerunfilecheck.sty
 INPUT C:\Program Files\MiKTeX 2.9\tex\generic\uniquecounter\uniquecounter.sty
 INPUT C:\Program Files\MiKTeX 2.9\tex\generic\uniquecounter\uniquecounter.sty
-INPUT C:\Program Files\MiKTeX 2.9\tex\latex\float\float.sty
-INPUT C:\Program Files\MiKTeX 2.9\tex\latex\float\float.sty
 INPUT d:\___UFM-Cursos___\4_Semestre-[Julio-Noviembre-2020]\____SumaDeCursosUFM2.2____\___Statistical_Thinking_II_-Notas___\Projects\Proyecto_1_stats\Proyecto_1_stats.aux
 INPUT d:\___UFM-Cursos___\4_Semestre-[Julio-Noviembre-2020]\____SumaDeCursosUFM2.2____\___Statistical_Thinking_II_-Notas___\Projects\Proyecto_1_stats\Proyecto_1_stats.aux
 OUTPUT d:\___UFM-Cursos___\4_Semestre-[Julio-Noviembre-2020]\____SumaDeCursosUFM2.2____\___Statistical_Thinking_II_-Notas___\Projects\Proyecto_1_stats\Proyecto_1_stats.aux
@@ -454,24 +472,29 @@ INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\cm\cmtt8.tfm
 INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\cm\cmtt8.tfm
 INPUT d:\___UFM-Cursos___\4_Semestre-[Julio-Noviembre-2020]\____SumaDeCursosUFM2.2____\___Statistical_Thinking_II_-Notas___\Projects\Proyecto_1_stats\title.tex
 INPUT d:\___UFM-Cursos___\4_Semestre-[Julio-Noviembre-2020]\____SumaDeCursosUFM2.2____\___Statistical_Thinking_II_-Notas___\Projects\Proyecto_1_stats\title.tex
+INPUT d:\___UFM-Cursos___\4_Semestre-[Julio-Noviembre-2020]\____SumaDeCursosUFM2.2____\___Statistical_Thinking_II_-Notas___\Projects\Proyecto_1_stats\ufmlogo.png
+INPUT d:\___UFM-Cursos___\4_Semestre-[Julio-Noviembre-2020]\____SumaDeCursosUFM2.2____\___Statistical_Thinking_II_-Notas___\Projects\Proyecto_1_stats\ufmlogo.png
+INPUT d:\___UFM-Cursos___\4_Semestre-[Julio-Noviembre-2020]\____SumaDeCursosUFM2.2____\___Statistical_Thinking_II_-Notas___\Projects\Proyecto_1_stats\ufmlogo.png
+INPUT d:\___UFM-Cursos___\4_Semestre-[Julio-Noviembre-2020]\____SumaDeCursosUFM2.2____\___Statistical_Thinking_II_-Notas___\Projects\Proyecto_1_stats\ufmlogo.png
+INPUT d:\___UFM-Cursos___\4_Semestre-[Julio-Noviembre-2020]\____SumaDeCursosUFM2.2____\___Statistical_Thinking_II_-Notas___\Projects\Proyecto_1_stats\ufmlogo.png
 INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\cm\cmr17.tfm
-INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\cm\cmbx12.tfm
-INPUT d:\___UFM-Cursos___\4_Semestre-[Julio-Noviembre-2020]\____SumaDeCursosUFM2.2____\___Statistical_Thinking_II_-Notas___\Projects\Proyecto_1_stats\ufmlogo.png
-INPUT d:\___UFM-Cursos___\4_Semestre-[Julio-Noviembre-2020]\____SumaDeCursosUFM2.2____\___Statistical_Thinking_II_-Notas___\Projects\Proyecto_1_stats\ufmlogo.png
-INPUT d:\___UFM-Cursos___\4_Semestre-[Julio-Noviembre-2020]\____SumaDeCursosUFM2.2____\___Statistical_Thinking_II_-Notas___\Projects\Proyecto_1_stats\ufmlogo.png
-INPUT d:\___UFM-Cursos___\4_Semestre-[Julio-Noviembre-2020]\____SumaDeCursosUFM2.2____\___Statistical_Thinking_II_-Notas___\Projects\Proyecto_1_stats\ufmlogo.png
-INPUT d:\___UFM-Cursos___\4_Semestre-[Julio-Noviembre-2020]\____SumaDeCursosUFM2.2____\___Statistical_Thinking_II_-Notas___\Projects\Proyecto_1_stats\ufmlogo.png
 INPUT C:\Users\DAVIDCORZO\AppData\Local\MiKTeX\2.9\pdftex\config\pdftex.map
 INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\cm\cmr12.tfm
 INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\cm\cmbx12.tfm
+INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\jknappen\ec\tcrm1000.tfm
 INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\cm\cmbx10.tfm
-INPUT d:\___UFM-Cursos___\4_Semestre-[Julio-Noviembre-2020]\____SumaDeCursosUFM2.2____\___Statistical_Thinking_II_-Notas___\Projects\Proyecto_1_stats\first_attempt.pdf
-INPUT d:\___UFM-Cursos___\4_Semestre-[Julio-Noviembre-2020]\____SumaDeCursosUFM2.2____\___Statistical_Thinking_II_-Notas___\Projects\Proyecto_1_stats\first_attempt.pdf
-INPUT d:\___UFM-Cursos___\4_Semestre-[Julio-Noviembre-2020]\____SumaDeCursosUFM2.2____\___Statistical_Thinking_II_-Notas___\Projects\Proyecto_1_stats\first_attempt.pdf
-INPUT d:\___UFM-Cursos___\4_Semestre-[Julio-Noviembre-2020]\____SumaDeCursosUFM2.2____\___Statistical_Thinking_II_-Notas___\Projects\Proyecto_1_stats\first_attempt.pdf
+INPUT d:\___UFM-Cursos___\4_Semestre-[Julio-Noviembre-2020]\____SumaDeCursosUFM2.2____\___Statistical_Thinking_II_-Notas___\Projects\Proyecto_1_stats\onetail.pdf
+INPUT d:\___UFM-Cursos___\4_Semestre-[Julio-Noviembre-2020]\____SumaDeCursosUFM2.2____\___Statistical_Thinking_II_-Notas___\Projects\Proyecto_1_stats\onetail.pdf
+INPUT d:\___UFM-Cursos___\4_Semestre-[Julio-Noviembre-2020]\____SumaDeCursosUFM2.2____\___Statistical_Thinking_II_-Notas___\Projects\Proyecto_1_stats\onetail.pdf
+INPUT d:\___UFM-Cursos___\4_Semestre-[Julio-Noviembre-2020]\____SumaDeCursosUFM2.2____\___Statistical_Thinking_II_-Notas___\Projects\Proyecto_1_stats\onetail.pdf
+INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\cm\cmr12.tfm
+INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\cm\cmbx12.tfm
+INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\cm\cmti10.tfm
 INPUT d:\___UFM-Cursos___\4_Semestre-[Julio-Noviembre-2020]\____SumaDeCursosUFM2.2____\___Statistical_Thinking_II_-Notas___\Projects\Proyecto_1_stats\Proyecto_1_stats.aux
 INPUT d:\___UFM-Cursos___\4_Semestre-[Julio-Noviembre-2020]\____SumaDeCursosUFM2.2____\___Statistical_Thinking_II_-Notas___\Projects\Proyecto_1_stats\Proyecto_1_stats.out
 INPUT d:\___UFM-Cursos___\4_Semestre-[Julio-Noviembre-2020]\____SumaDeCursosUFM2.2____\___Statistical_Thinking_II_-Notas___\Projects\Proyecto_1_stats\Proyecto_1_stats.out
+INPUT C:\Users\DAVIDCORZO\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1000.pk
+INPUT C:\Users\DAVIDCORZO\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1000.pk
 INPUT C:\Program Files\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmbx10.pfb
 INPUT C:\Program Files\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmbx10.pfb
 INPUT C:\Program Files\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmbx12.pfb
@@ -484,7 +507,13 @@ INPUT C:\Program Files\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmmi7.pfb
 INPUT C:\Program Files\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmmi7.pfb
 INPUT C:\Program Files\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmr10.pfb
 INPUT C:\Program Files\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmr10.pfb
+INPUT C:\Program Files\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmr17.pfb
+INPUT C:\Program Files\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmr17.pfb
 INPUT C:\Program Files\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmr7.pfb
 INPUT C:\Program Files\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmr7.pfb
 INPUT C:\Program Files\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmsy10.pfb
 INPUT C:\Program Files\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmsy10.pfb
+INPUT C:\Program Files\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmti10.pfb
+INPUT C:\Program Files\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmti10.pfb
+INPUT C:\Program Files\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmtt10.pfb
+INPUT C:\Program Files\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmtt10.pfb
