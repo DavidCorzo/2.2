@@ -1,0 +1,35 @@
+FUNCTION mergeSort(arr[]) {
+    int size = arr.size;
+    if (size > 1) {
+        int middle = floor(size/2);
+        int left_array[] = arr[from indexes: 0 < middle];
+        int right_array[] = arr[from indexes: middle <= arr.size];
+        mergeSort(left_array); Comment: repeat the process done thus far with the left array.
+        mergeSort(right_array); Comment: repeat the process done thus far with the right array.
+        int previous = 0, current = 0, next = 0;
+
+        int left_size = left_array.size;
+        int right_size = right_array.size;
+
+        while ( (previous < left_size) and (current < right_size) ) do {
+            if (left_array[prev] < right_array[current]) {
+                arr[next] = left_array[previous];
+                previous = previous + 1;
+            }
+            else {
+                arr[next] = right_array[current];
+                current = current + 1;
+            }
+        }
+        while (prev < left_size) do {
+            arr[next] = left_array[prev];
+            previous = previous + 1;
+            next = next + 1;
+        }
+        while (current < right_size) do {
+            arr[next] = right_array[curr];
+            current = current + 1;
+            next = next + 1;
+        }
+    }
+}
