@@ -1,0 +1,94 @@
+\documentclass{article}
+
+\usepackage{generalsnips}
+\usepackage{calculussnips}
+\usepackage{programmingsnips}
+\usepackage[margin = 1in]{geometry}
+\usepackage{pdfpages}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage[utf8]{inputenc}
+\usepackage{titlesec}
+\usepackage{xpatch}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage[linesnumbered,boxed]{algorithm2e}
+\usepackage{minted}
+\title{Problema de minimo de monedas}
+\date{2020 October 21} % , 07:45AM
+\author{David Corzo}
+
+\darktheme
+
+\begin{document}
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Problema del mínimo de monedas}
+Este problema aborda la forma de encontrar el número mínimo de monedas (de ciertas 
+denominaciones) tales que entre ellas suman una cierta cantidad. 
+
+Se desea encontrar la forma de devolver un valor de dinero usando monedas de 1, 5, 10, 25, 50 
+centavos y 1 Quetzal (considere que hay una cantidad infinita de monedas de cada 
+denominación), empleando la menor cantidad de monedas posible. 
+
+\subsection{Resolución}
+
+Este problema se resuelve con algoritmo tipo voraz, la clave aquí es la realización que la mejor decisión local es precisamente escoger la mayor denominación de moneda que restado el monto $V$  me dé mayor o igual a cero.
+
+Por ejemplo tenemos $V = 70$, tomando en cuenta las denominaciones $\{ 1,5,10,25,50 \}$ debemos tomar 50 centavos por que $70 - 50$, esto de manera iterativa hasta llegar al monto $V$.
+
+\begin{center}
+    \begin{algorithm}[H]
+        \SetAlgoLined
+        \large
+        int denominaciones[] = {1, 5, 10, 25, 50}\;
+        escoger denominación más grande que restado 70 me dé un número mayor o igual a 0\; 
+        escojo 50 por que $70 - 50 = 20$\; 
+        ahora para ajustar al valor de $20$ debo buscar la denominación más grande que restado 20 me dé un número mayor o igual a 0, como podemos ver es la denominación 20.\;
+        La respuesta es: una moneda de 50 y una de 20.
+        \caption{Mínimo de monedas para $V = 70$ pseudocódigo ejemplar}
+    \end{algorithm}
+\end{center}
+
+\section{Pseudocódigo formal}
+\begin{center}
+    \begin{algorithm}[H]
+        \SetAlgoLined
+        \large
+        int denominations[] = {1,5,10,25,50}\; 
+        
+        int i = denominations.lenght() - 1\; 
+
+        \While{(0 $\leq$ i)}{                
+            \While{(V $\geq$ denominations[i])}{
+                V = V - denominations[i]\;
+                print(``One coin of denomination '' + string(denominations[i]))\;
+            }
+            i = i - 1\; 
+        }
+        \caption{OPERACIÓN MÍNIMO DE MONEDAS ($V$)}
+
+    \end{algorithm}
+\end{center}
+
+\section{Implementación en Python}
+\inputcode{py}{./implementation.py}
+\begin{minted}[autogobble]{py}
+# input:
+    # Enter the value for V:70
+# output:
+    # 2 coins of denomination 10
+    # 1 coins of denomination 50
+
+\end{minted}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+
